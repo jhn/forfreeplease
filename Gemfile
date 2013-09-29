@@ -6,6 +6,7 @@ gem 'mongo'
 gem 'bson_ext'
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 gem 'mongo'
+gem 'foursquare2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
