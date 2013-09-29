@@ -103,4 +103,11 @@ function getDirections() {
           directionsDisplay.setDirections(response);
         }
     });
+
+    var rad = getRadius();
+
+    $.getJSON("foursquare", { longitude: to[0], latitude: to[1], radius: rad }, function(data) {
+        console.log("in 4sq call");
+        console.log(data);
+    });
 }
