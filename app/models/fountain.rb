@@ -7,8 +7,10 @@ class Fountain
 
   class << self
     def near(params={})
-      # Should be an array containing [lat, lon]
-      # The radious is divided by
+      lon    = params[:longitude].to_f
+      lat    = params[:latitude].to_f
+      radius = params[:radius].to_f
+      Fountain.geo_near([lon, lat]).spherical.max_distance(radius / 3959).entries
     end
   end
 end
