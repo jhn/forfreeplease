@@ -1,6 +1,7 @@
 var foundFountains = [];
 var userLocation;
 var userMap;
+var spinner = null;
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -33,7 +34,7 @@ function success(userPosition) {
 
     userLocation = new google.maps.LatLng(lat, lon);
 
-    console.log("User is at: [" + lon + ", " + lat + "], and selected radius " + rad);
+    // console.log("User is at: [" + lon + ", " + lat + "], and selected radius " + rad);
 
     $.getJSON("fountains", { longitude: lon, latitude: lat, radius: rad }, function(data) {
             showMap(data, userPosition);
@@ -110,11 +111,12 @@ function getDirections() {
         if (status == google.maps.DirectionsStatus.OK) {
             response.routes[0].legs[0].steps.forEach(function(t){
                 // console.log(drivePath.push[new google.maps.LatLng(t.path[0].nb, t.path[0].ob)]);
-                console.log(drivePath.push(new google.maps.LatLng(t.path[0].nb, t.path[0].ob)));
+                // console.log(drivePath.push(new google.maps.LatLng(t.path[0].nb, t.path[0].ob)));
             });
             directionsDisplay.setDirections(response);
         }
     });
+
     polyline = new google.maps.Polyline({
         path: drivePath,
         strokeColor: "#FF0000",
@@ -124,11 +126,12 @@ function getDirections() {
 
     var rad = getRadius();
 
-    spinner();
+    spinSpinner();
     $.getJSON("foursquare", { longitude: to[0], latitude: to[1], radius: rad }, function(data) {
         renderDeals(data);
+
+        spinner.stop();
     });
-        $('#foo').hide();
 }
 
 function renderDeals(data){
@@ -152,7 +155,7 @@ function renderDeals(data){
     });
 }
 
-function spinner(){
+function spinSpinner(){
     var opts = {
         lines: 13, // The number of lines to draw
         length: 7, // The length of each line
@@ -171,6 +174,10 @@ function spinner(){
         top: 'auto', // Top position relative to parent in px
         left: 'auto' // Left position relative to parent in px
     };
-    var target = $('#foo');
-    var spinner = new Spinner(opts).spin(target);
+    var target = document.getElementById('foo');
+    if (spinner == null) {
+        spinner = new Spinner(opts).spin(target);
+    } else {
+        spinner.spin(target);
+    }
 }
