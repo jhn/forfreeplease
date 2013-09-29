@@ -1,13 +1,13 @@
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, handleError, {maximumAge: 600000, timeout: 5000});
+        navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 600000, timeout: 5000});
     } else {
         alert("Location cannot be retrieved");
     }
 }
 
-function handleError(error) {
-    console.log("There has been an error: " + error);
+function error(e) {
+    console.log("There has been an error: " + e);
     console.log("Probably the timeout expired?");
 }
 
