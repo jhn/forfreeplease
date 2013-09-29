@@ -87,7 +87,7 @@ function createMarkersForMap(fountains, map) {
 }
 
 function getDirections() {
-    var directionsDisplay = new google.maps.DirectionsRenderer();
+    var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
     var directionsService = new google.maps.DirectionsService();
     directionsDisplay.setMap(userMap);
     var to = $("#map").data('loc');
