@@ -80,7 +80,7 @@ function createMarkersForMap(fountains, map) {
         google.maps.event.addListener(marker, 'click', function() {
             map.setZoom(15);
             map.setCenter(marker.getPosition());
-            console.log(fountain.location);
+            // console.log(fountain.location);
             $("#map").data('loc', fountain.location);
         });
     });
@@ -107,7 +107,10 @@ function getDirections() {
     var rad = getRadius();
 
     $.getJSON("foursquare", { longitude: to[0], latitude: to[1], radius: rad }, function(data) {
-        console.log("in 4sq call");
-        console.log(data);
+        var deal;
+        data.forEach(function(special){
+            deal = "Venue: " + special.venue.name + "\nDescription: " + special.message + "\nHow:" + special.description;
+            console.log(deal + "\n");
+        });
     });
 }
