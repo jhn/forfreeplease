@@ -44,7 +44,7 @@ function showMap(fountains, userPosition) {
     // Should handle case where there's no fountains to display
     var mapOptions = {
         center: new google.maps.LatLng(userPosition.coords.latitude, userPosition.coords.longitude),
-        zoom: 14,
+        zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -79,7 +79,7 @@ function createMarkersForMap(fountains, map) {
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-            map.setZoom(15);
+            map.setZoom(17);
             map.setCenter(marker.getPosition());
             $("#map").data('loc', fountain.location);
             // Fire off a request.
@@ -124,9 +124,11 @@ function getDirections() {
 
     var rad = getRadius();
 
+    spinner();
     $.getJSON("foursquare", { longitude: to[0], latitude: to[1], radius: rad }, function(data) {
         renderDeals(data);
     });
+        $('#foo').hide();
 }
 
 function renderDeals(data){
@@ -148,4 +150,27 @@ function renderDeals(data){
         deal = "<div class=\"venue\"><h3 class=\"v-title\">" + special.venue.name + "</h3><p class=\"v-desc\">" + special.message + "</p><p class=\"v-how\">How: " + special.description + "</p>";
         $('#foursquare').append("<li> "+ deal +" </li>");
     });
+}
+
+function spinner(){
+    var opts = {
+        lines: 13, // The number of lines to draw
+        length: 7, // The length of each line
+        width: 2, // The line thickness
+        radius: 7, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb or array of colors
+        speed: 2, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: 'auto', // Top position relative to parent in px
+        left: 'auto' // Left position relative to parent in px
+    };
+    var target = $('#foo');
+    var spinner = new Spinner(opts).spin(target);
 }
