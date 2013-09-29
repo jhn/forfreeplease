@@ -17,6 +17,7 @@ function error(e) {
 
 // Gets the radius specified by the user. Defaults to 0.5 km
 function getRadius() {
+    $('#foursquare').empty();
     var radioButtons = document.getElementsByTagName('input');
     for (var i = 0; i < radioButtons.length; i++) {
         if (radioButtons[i].type === 'radio' && radioButtons[i].checked) {
@@ -85,7 +86,12 @@ function createMarkersForMap(fountains, map) {
     });
 }
 
+var polyline;
 function getDirections() {
+    $('#foursquare').empty(); // Clear the current deals
+    if(polyline && polyline.setMap(null));
+    // console.log(pathStyle);
+
     var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
     var directionsService = new google.maps.DirectionsService();
     directionsDisplay.setMap(userMap);
@@ -97,10 +103,21 @@ function getDirections() {
         travelMode: google.maps.TravelMode.WALKING
     };
 
+    var drivePath = [];
     directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
+            response.routes[0].legs[0].steps.forEach(function(t){
+                // console.log(drivePath.push[new google.maps.LatLng(t.path[0].nb, t.path[0].ob)]);
+                console.log(drivePath.push(new google.maps.LatLng(t.path[0].nb, t.path[0].ob)));
+            });
+            directionsDisplay.setDirections(response);
         }
+    });
+    polyline = new google.maps.Polyline({
+        path: drivePath,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2
     });
 
     var rad = getRadius();
