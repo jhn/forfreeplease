@@ -136,8 +136,10 @@ function renderDeals(data){
         }
     }
 
+    // ONLY 5
+    // Get rid of the button
     data.forEach(function(special){
-        deal = "<div class=\"venue\"><p class=\"v-title\">Venue: " + special.venue.name + "</p><p class=\"v-desc\">Description: " + special.message + "</p><p class=\"v-how\">How: " + special.description + "</p>";
+        deal = "<div class=\"venue\"><h3 class=\"v-title\">" + special.venue.name + "</h3><p class=\"v-desc\">" + special.message + "</p><p class=\"v-how\">How: " + special.description + "</p>";
         $('#foursquare').append("<li> "+ deal +" </li>");
     });
 }

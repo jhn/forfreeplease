@@ -6,6 +6,11 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto Slab', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
 }
 
 h1 {
@@ -36,9 +41,15 @@ ul {
 
 #foursquare li {
     border-radius: 10px;
-    background: gray;
+    background: #ccc;
     padding: 10px;
     text-align: center;
+    margin-bottom: 10px;
+}
+
+#foursquare li p {
+    width: 50%;
+    margin: auto;
 }
 
 #radius {
@@ -50,10 +61,18 @@ ul {
 
 #button {
     width: 60%;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
+    margin: 30px auto;
+}
+
+#button input {
     margin-top: 20px;
+    background-color: #B0DBF7;
+    border: none;
+    font-size: 2em;
+    font-family: 'Roboto Slab', serif;
+    padding: 10px;
+    margin: 30px auto;
 }
 
 .menu {
