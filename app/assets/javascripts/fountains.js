@@ -82,6 +82,8 @@ function createMarkersForMap(fountains, map) {
             map.setZoom(15);
             map.setCenter(marker.getPosition());
             $("#map").data('loc', fountain.location);
+            // Fire off a request.
+            getDirections();
         });
     });
 }
@@ -130,13 +132,17 @@ function getDirections() {
 function renderDeals(data){
     data = data.sort(function(a, b){ return a.venue.name - b.venue.name; });
 
+    // Only display the 5 best deals
+    if(data.length > 5){
+        data = data.slice(0, 5);
+    }
+
     for(var i = 0; i < data.length - 1; i++) {
-        if (data[i].venue.name == data[i+1].venue.name) {
+        if (data[i].venue.name == data[i + 1].venue.name) {
             delete data[i];
         }
     }
 
-    // ONLY 5
     // Get rid of the button
     data.forEach(function(special){
         deal = "<div class=\"venue\"><h3 class=\"v-title\">" + special.venue.name + "</h3><p class=\"v-desc\">" + special.message + "</p><p class=\"v-how\">How: " + special.description + "</p>";
