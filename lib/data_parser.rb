@@ -47,5 +47,5 @@ class MongoDumper
 end
 
 documents = DataParser.parse "fountains.csv"
-dumper    = MongoDumper.new "forfreeplease_test", "fountains"
+dumper    = MongoDumper.new "forfreeplease_development", "fountains"
 dumper.add_to_collection documents
