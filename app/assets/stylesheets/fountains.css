@@ -21,10 +21,39 @@ h1 {
     margin-right: auto;
 }
 
+#foursquare {
+    position: relative;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#foursquare li {
+    border-radius: 10px;
+    background: gray;
+    padding: 10px;
+    text-align: center;
+}
+
 #radius {
     width: 150px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
+}
+
+#button {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .menu {

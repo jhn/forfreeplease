@@ -137,7 +137,7 @@ function renderDeals(data){
     }
 
     data.forEach(function(special){
-        deal = "Venue: " + special.venue.name + "\nDescription: " + special.message + "\nHow: " + special.description;
-        $('#foursquare').append("<p> "+ deal +" </p>");
+        deal = "<div class=\"venue\"><p class=\"v-title\">Venue: " + special.venue.name + "</p><p class=\"v-desc\">Description: " + special.message + "</p><p class=\"v-how\">How: " + special.description + "</p>";
+        $('#foursquare').append("<li> "+ deal +" </li>");
     });
 }
