@@ -80,7 +80,6 @@ function createMarkersForMap(fountains, map) {
         google.maps.event.addListener(marker, 'click', function() {
             map.setZoom(15);
             map.setCenter(marker.getPosition());
-            // console.log(fountain.location);
             $("#map").data('loc', fountain.location);
         });
     });
@@ -107,10 +106,21 @@ function getDirections() {
     var rad = getRadius();
 
     $.getJSON("foursquare", { longitude: to[0], latitude: to[1], radius: rad }, function(data) {
-        var deal;
-        data.forEach(function(special){
-            deal = "Venue: " + special.venue.name + "\nDescription: " + special.message + "\nHow:" + special.description;
-            console.log(deal + "\n");
-        });
+        renderDeals(data);
+    });
+}
+
+function renderDeals(data){
+    data = data.sort(function(a, b){ return a.venue.name - b.venue.name; });
+
+    for(var i = 0; i < data.length - 1; i++) {
+        if (data[i].venue.name == data[i+1].venue.name) {
+            delete data[i];
+        }
+    }
+
+    data.forEach(function(special){
+        deal = "Venue: " + special.venue.name + "\nDescription: " + special.message + "\nHow: " + special.description;
+        $('#foursquare').append("<p> "+ deal +" </p>");
     });
 }
