@@ -5,9 +5,11 @@ gem 'rails', '4.0.0'
 gem 'mongo'
 gem 'bson_ext'
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
+gem 'mongo'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'haml-rails', '>= 0.3.4', :group => :development
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
