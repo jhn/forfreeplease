@@ -1,3 +1,7 @@
+var foundFountains = [];
+var userLocation;
+var userMap;
+
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 600000, timeout: 5000});
@@ -26,6 +30,8 @@ function success(userPosition) {
     var lon = userPosition.coords.longitude;
     var rad = getRadius();
 
+    userLocation = new google.maps.LatLng(lat, lon);
+
     console.log("User is at: [" + lon + ", " + lat + "], and selected radius " + rad);
 
     $.getJSON("fountains", { longitude: lon, latitude: lat, radius: rad }, function(data) {
@@ -41,6 +47,7 @@ function showMap(fountains, userPosition) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    userMap = map;
 
     createMarkersForMap(fountains, map);
 }
@@ -73,6 +80,27 @@ function createMarkersForMap(fountains, map) {
         google.maps.event.addListener(marker, 'click', function() {
             map.setZoom(15);
             map.setCenter(marker.getPosition());
+            console.log(fountain.location);
+            $("#map").data('loc', fountain.location);
         });
+    });
+}
+
+function getDirections() {
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    var directionsService = new google.maps.DirectionsService();
+    directionsDisplay.setMap(userMap);
+    var to = $("#map").data('loc');
+    var from = userLocation;
+    var request = {
+        origin: from,
+        destination: new google.maps.LatLng(to[1], to[0]),
+        travelMode: google.maps.TravelMode.WALKING
+    };
+
+    directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+        }
     });
 }
