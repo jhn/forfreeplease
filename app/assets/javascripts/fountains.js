@@ -5,6 +5,8 @@ function success(position) {
   mapcanvas.style.height = '400px';
   mapcanvas.style.width = '560px';
 
+  console.log("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
+
   document.querySelector('article').appendChild(mapcanvas);
 
   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
