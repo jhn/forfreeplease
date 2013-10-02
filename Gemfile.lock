@@ -150,6 +150,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   figaro
   foursquare2
+  haml
   haml-rails (>= 0.3.4)
   jbuilder (~> 1.2)
   jquery-rails
