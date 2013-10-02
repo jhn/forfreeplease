@@ -80,7 +80,9 @@ production:
     default:
       database: forfreeplease_production
       hosts:
-        - localhost:27017
+        - <%= ENV["MONGO_HOST"] %>
+      username: <%= ENV["MONGO_USER"] %>
+      password: <%= ENV["MONGO_PWD"] %>
       options:
         read: primary
         # In the test environment we lower the retries and retry interval to
