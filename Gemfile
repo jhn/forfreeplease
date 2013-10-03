@@ -15,6 +15,7 @@ group :development do
   gem 'haml-rails', '>= 0.3.4'
   gem 'haml'
   gem 'capistrano'
+  gem 'rvm-capistrano'
 end
 
 # Use Uglifier as compressor for JavaScript assets
