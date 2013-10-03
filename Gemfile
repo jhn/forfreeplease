@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'mongo'
 gem 'bson_ext'
-gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
+gem 'mongoid', :git => 'https://github.com/mongoid/mongoid.git'
 gem 'mongo'
 gem 'foursquare2'
 gem 'figaro'
@@ -12,7 +12,7 @@ gem 'figaro'
 # Use SCSS for stylesheets
 group :development do
   gem 'sass-rails', '~> 4.0.0'
-  gem 'haml-rails', '>= 0.3.4', :group => :development
+  gem 'haml-rails', '>= 0.3.4'
   gem 'haml'
   gem 'capistrano'
 end
