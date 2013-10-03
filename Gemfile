@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'mongo'
 gem 'bson_ext'
-gem 'mongoid', :git => 'https://github.com/mongoid/mongoid.git'
+gem 'mongoid', git: 'mongoid/mongoid.git'
 gem 'mongo'
 gem 'foursquare2'
 gem 'figaro'
@@ -15,6 +15,7 @@ group :development do
   gem 'haml-rails', '>= 0.3.4'
   gem 'haml'
   gem 'capistrano'
+  gem 'rvm-capistrano'
 end
 
 # Use Uglifier as compressor for JavaScript assets
