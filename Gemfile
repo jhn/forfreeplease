@@ -8,12 +8,12 @@ gem 'mongoid', github: 'mongoid/mongoid'
 gem 'mongo'
 gem 'foursquare2'
 gem 'figaro'
+gem 'haml'
 
 # Use SCSS for stylesheets
 group :development do
   gem 'sass-rails', '~> 4.0.0'
   gem 'haml-rails', '>= 0.3.4'
-  gem 'haml'
   gem 'capistrano'
   gem 'rvm-capistrano'
 end
