@@ -1,13 +1,17 @@
+require 'bundler/capistrano'
+require 'rvm/capistrano'
+
+set :rvm_ruby_string, :local
 set :application, "For Free, Please"
 set :repository,  "git@github.com:jhn/forfreeplease.git"
-set :deploy_to, ENV['APP_LOCATION']
+set :deploy_to, "/home/jhn/rails"
 set :scm, :git
 set :branch, "master"
 set :user, "jhn"
 set :use_sudo, false
 set :rails_env, "production"
 set :deploy_via, :copy
-set :ssh_options, { :forward_agent => true, :port => ENV['SSH_PORT']}
+set :ssh_options, { :forward_agent => true, :port => 20532}
 set :keep_releases, 3
 
 default_run_options[:pty] = true
@@ -15,7 +19,7 @@ default_run_options[:pty] = true
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-server ENV['SERVER_ADDRESS'], :app, :web, :db, :primary => true
+server "162.243.23.71", :app, :web, :db, :primary => true
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
