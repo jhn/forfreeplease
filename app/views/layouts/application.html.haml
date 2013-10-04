@@ -7,7 +7,7 @@
     = csrf_meta_tags
     %meta{name: 'viewport', content: "initial-scale=1, maximum-scale=1, width=device-width"}
     -# %link{rel: 'stylesheet', href: 'http://fonts.googleapis.com/css?family=Titillium+Web'}
-    %script{src: 'https://maps.googleapis.com/maps/api/js?key=#{ENV['GMAPS_API_KEY']}&sensor=true'}
+    %script{src: "https://maps.googleapis.com/maps/api/js?key=#{ENV['GMAPS_API_KEY']}&sensor=true"}
     %link{rel: 'stylesheet', href: 'http://fonts.googleapis.com/css?family=Roboto+Slab'}
   %body{onload: 'getLocation()'}
     = yield
