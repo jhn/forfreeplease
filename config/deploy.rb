@@ -16,35 +16,26 @@ set :keep_releases, 3
 
 default_run_options[:pty] = true
 
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-
 server "162.243.23.71", :app, :web, :db, :primary => true
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
-
-namespace :mongoid do
-  desc "Copy mongoid config"
-  task :copy do
-    upload "config/mongoid.yml", "#{shared_path}/mongoid.yml", :via => :scp
-  end
-
-  desc "Link the mongoid config in the release_path"
-  task :symlink do
-    run "test -f #{release_path}/config/mongoid.yml || ln -s #{shared_path}/mongoid.yml #{release_path}/config/mongoid.yml"
+namespace :deploy do
+  desc "Restart capistrano"
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 end
 
+namespace :figaro do
+  desc "Copy figaro config"
+  task :copy do
+    upload "config/application.yml", "#{shared_path}/application.yml", :via => :scp
+  end
+
+  desc "Link the figaro config in the release_path"
+  task :symlink do
+    run "test -f #{release_path}/config/application.yml || ln -s #{shared_path}/application.yml #{release_path}/config/application.yml"
+  end
+end
+
+after "deploy", "figaro:copy"
+after "deploy", "figaro:symlink"
