@@ -87,10 +87,8 @@ function createMarkersForMap(fountains, map) {
     });
 }
 
-var polyline;
 function getDirections() {
     $('#foursquare').empty();
-    if(polyline && polyline.setMap(null));
 
     var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
     var directionsService = new google.maps.DirectionsService();
