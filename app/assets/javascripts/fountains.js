@@ -1,4 +1,3 @@
-var foundFountains = [];
 var userLocation;
 var userMap;
 var spinner = null;
@@ -90,9 +89,6 @@ function createMarkersForMap(fountains, map) {
 function getDirections() {
     $('#foursquare').empty();
 
-    var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
-    var directionsService = new google.maps.DirectionsService();
-    directionsDisplay.setMap(userMap);
     var to = $("#map").data('loc');
     var from = userLocation;
     var request = {
@@ -106,7 +102,6 @@ function getDirections() {
     spinSpinner();
     $.getJSON("foursquare", { longitude: to[0], latitude: to[1], radius: rad }, function(data) {
         renderDeals(data);
-
         spinner.stop();
     });
 }
