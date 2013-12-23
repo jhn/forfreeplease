@@ -6,13 +6,20 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 600000, timeout: 5000});
     } else {
-        alert("Location cannot be retrieved");
+      this.error("Location could not be retrieved.")
     }
 }
 
-function error(e) {
-    console.log("There has been an error: " + e);
-    console.log("Probably the timeout expired?");
+function success(userPosition) {
+    var lat = userPosition.coords.latitude;
+    var lon = userPosition.coords.longitude;
+    var rad = getRadius();
+
+    userLocation = new google.maps.LatLng(lat, lon);
+
+    $.getJSON("fountains", { longitude: lon, latitude: lat, radius: rad }, function(data) {
+        showMap(data, userPosition);
+    });
 }
 
 // Gets the radius specified by the user. Defaults to 0.5 km
@@ -26,16 +33,8 @@ function getRadius() {
     }
 }
 
-function success(userPosition) {
-    var lat = userPosition.coords.latitude;
-    var lon = userPosition.coords.longitude;
-    var rad = getRadius();
-
-    userLocation = new google.maps.LatLng(lat, lon);
-
-    $.getJSON("fountains", { longitude: lon, latitude: lat, radius: rad }, function(data) {
-            showMap(data, userPosition);
-    });
+function error(e) {
+    console.log("There has been an error: " + e);
 }
 
 function showMap(fountains, userPosition) {
