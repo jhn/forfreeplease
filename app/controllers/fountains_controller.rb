@@ -12,12 +12,11 @@ class FountainsController < ApplicationController
     latitude = params[:latitude]
     longitude = params[:longitude]
     radius = params[:radius].to_f * 1609.34
-    id = ENV['FOURSQUARE_ID']
-    secret = ENV['FOURSQUARE_SECRET']
-    client = Foursquare2::Client.new(client_id: id, client_secret: secret)
+    client = Foursquare2::Client.new(
+      client_id: ENV['FOURSQUARE_ID'],
+      client_secret: ENV['FOURSQUARE_SECRET']
+    )
     specials = client.search_specials(ll:"#{latitude},#{longitude}", radius: radius)
-    puts "About to make call: "
-    puts "ll: #{latitude},#{longitude}, radius: #{radius}"
     respond_to do |format|
       format.html
       format.json { render json: specials }
