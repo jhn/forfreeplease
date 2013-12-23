@@ -13,7 +13,7 @@ function getLocation() {
 function success(userPosition) {
     var lat = userPosition.coords.latitude;
     var lon = userPosition.coords.longitude;
-    var rad = getRadius();
+    var rad = parseFloat(getRadius());
 
     userLocation = new google.maps.LatLng(lat, lon);
 
@@ -25,12 +25,7 @@ function success(userPosition) {
 // Gets the radius specified by the user. Defaults to 0.5 km
 function getRadius() {
     $('#foursquare').empty();
-    var radioButtons = document.getElementsByTagName('input');
-    for (var i = 0; i < radioButtons.length; i++) {
-        if (radioButtons[i].type === 'radio' && radioButtons[i].checked) {
-            return parseFloat(radioButtons[i].value);
-        }
-    }
+    $('#radius').children(':checked');
 }
 
 function error(e) {
